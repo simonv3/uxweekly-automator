@@ -1,0 +1,19 @@
+<table align="left" border="0" cellpadding="0" cellspacing="0" width="600" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+  <tbody><tr>
+
+    <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;color: #606060;font-family: Georgia, Times, &#39;Times New Roman&#39;, serif;font-size: 16px;line-height: 150%;text-align: left;">
+
+        Here's this week's links:<br>
+&nbsp;
+
+{% for up in upcoming %}
+
+  <h2 style="display: block;font-family: Helvetica;font-size: 22px;font-style: normal;font-weight: bold;letter-spacing: -.75px;margin: 0;text-align: left;color: #404040 !important;">Old:&nbsp;<a href="{{ up.href }}" target="_blank" style="color: #44aaf8;font-weight: normal;text-decoration: underline;word-wrap: break-word !important;">{{ up.description }}</a></h2>
+  <br style="line-height: 20.7999992370605px;">
+  {{ up.extended }}<br>
+&nbsp;
+{% endfor %}
+
+        </td>
+    </tr>
+</tbody></table>

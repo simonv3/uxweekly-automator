@@ -1,0 +1,24 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    envyable (0.2.0)
+    gibbon (1.1.5)
+      httparty
+      multi_json (>= 1.9.0)
+    httparty (0.11.0)
+      multi_json (~> 1.0)
+      multi_xml (>= 0.5.2)
+    liquid (3.0.1)
+    multi_json (1.11.0)
+    multi_xml (0.5.5)
+    pinboard (0.1.1)
+      httparty (= 0.11.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  envyable
+  gibbon
+  liquid
+  pinboard (~> 0.1.1)
