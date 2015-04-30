@@ -2,6 +2,7 @@ require 'envyable'
 require 'gibbon'
 require 'pinboard'
 require 'liquid'
+require 'optparse'
 
 Envyable.load 'config/env.yml', 'development'
 
@@ -11,6 +12,13 @@ Gibbon::Export.throws_exceptions = false
 
 Liquid::Template.file_system = Liquid::LocalFileSystem.new('templates/partials')
 
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: auto.rb [options]"
+
+  opts.on('-i', '--issue ISSUE', 'Issue Number') { |v| options[:issue] = v }
+end.parse!
+
 gb = Gibbon::API.new
 list = gb.lists.list({ filters: { list_name: 'UX Weekly' } })
 list_id = list['data'][0]['id']
@@ -18,7 +26,7 @@ list_id = list['data'][0]['id']
 pinboard = Pinboard::Client.new(:username => ENV['PINBOARD_USERNAME'],
                                 :password => ENV['PINBOARD_PASSWORD'])
 
-edition = 118
+edition = options[:issue]
 
 upcoming = pinboard.posts(tag: 'uxweekly-sending')
 
@@ -55,3 +63,4 @@ gb.campaigns.create({ type: 'regular',
                       content: { html: html }
                     })
 
+puts "created"
