@@ -7,11 +7,12 @@
 &nbsp;
 
 {% for up in upcoming %}
-
-  <h2 style="display: block;font-family: Helvetica;font-size: 22px;font-style: normal;font-weight: bold;letter-spacing: -.75px;margin: 0;text-align: left;color: #404040 !important;">{{ up.tag }}:&nbsp;<a href="{{ up.href }}" target="_blank" style="color: #44aaf8;font-weight: normal;text-decoration: underline;word-wrap: break-word !important;">{{ up.description }}</a></h2>
+<div style="">
+  <h2 style="display: block;font-family: Helvetica;font-size: 22px;font-style: normal;font-weight: bold;letter-spacing: -.75px;margin: 0;text-align: left;color: #404040 !important;{% if up.tag == "Job" %}font-size: 18px;{% endif %}">{{ up.tag }}:&nbsp;<a href="{{ up.href }}" target="_blank" style="color: #44aaf8;font-weight: normal;text-decoration: underline;word-wrap: break-word !important;{% if up.tag == "Job" %}font-size:16px;{% endif %}">{{ up.description }}</a></h2>
   <br style="line-height: 20.7999992370605px;">
   {{ up.extended }}<br>
 &nbsp;
+</div>
 {% endfor %}
 
         </td>

@@ -44,7 +44,17 @@ upcoming_hash = upcoming.map do |link|
 
 end
 
-subject = "UX Weekly #{edition}: Not just another link dump"
+upcoming_hash.sort! do |a, b|
+  if a['tag'] == "Job"
+    1
+  elsif b['tag'] == "Job"
+    -1
+  else
+    0
+  end
+end
+
+subject = "UX Weekly ##{edition}"
 
 source = File.read('templates/uxweekly-mailchimp-template.liquid', :encoding => 'utf-8')
 html = Liquid::Template.parse(source).render 'upcoming' => upcoming_hash,
