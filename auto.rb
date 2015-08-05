@@ -17,6 +17,7 @@ OptionParser.new do |opts|
   opts.banner = "Usage: auto.rb [options]"
 
   opts.on('-i', '--issue ISSUE', 'Issue Number') { |v| options[:issue] = v }
+  opts.on('-b', '--blurb BLURB', 'Blurb') { |v| options[:blurb] = v }
 end.parse!
 
 gb = Gibbon::API.new
@@ -27,6 +28,9 @@ pinboard = Pinboard::Client.new(:username => ENV['PINBOARD_USERNAME'],
                                 :password => ENV['PINBOARD_PASSWORD'])
 
 edition = options[:issue]
+blurb = options[:blurb]
+
+puts blurb
 
 upcoming = pinboard.posts(tag: 'uxweekly-sending')
 
@@ -59,9 +63,8 @@ subject = "UX Weekly ##{edition}"
 source = File.read('templates/uxweekly-mailchimp-template.liquid', :encoding => 'utf-8')
 html = Liquid::Template.parse(source).render 'upcoming' => upcoming_hash,
                                              'edition' => edition,
+                                             'blurb' => blurb,
                                              'sent_on' => Date.today
-
-# puts html
 
 gb.campaigns.create({ type: 'regular',
                       options: { list_id: list_id,
