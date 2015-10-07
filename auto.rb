@@ -36,14 +36,17 @@ upcoming = pinboard.posts(tag: 'uxweekly-sending')
 
 upcoming_hash = upcoming.map do |link|
   tag_regex = /\/\/\/([A-Za-z]*)\/\/\//
+  extra_regex = /---(\n.*)/
   tag = tag_regex.match(link.to_h[:extended])
+
 
   # Liquid only accepts string hashes, not ruby 1.9 hashes
   # https://github.com/Shopify/liquid/issues/289
   link_hash = link.to_h
+  extended = link_hash[:extended].gsub(tag_regex, '').gsub(extra_regex, '')
   { "description" => link_hash[:description],
     "href" => link_hash[:href],
-    "extended" => link_hash[:extended].gsub(tag_regex, ''),
+    "extended" => extended,
     "tag" => tag ? tag[1] : '' }
 
 end
